@@ -16,8 +16,8 @@
 [FILTER](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L183-L214)  
 
 ### Conditional Expressions (Part of Constructor Exp.)
-[SWITCH](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L40)  
-[COND](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L49)  
+[SWITCH](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L40-L43)  
+[COND](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L49-L51)  
 [xsdbool(extra)](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L46)  
 
 ### Internal Table Expressions
