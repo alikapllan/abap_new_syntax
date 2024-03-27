@@ -1,4 +1,4 @@
-# ABAP New Syntax 7.4 7.5x
+# ABAP New Syntax 7.4x 7.5x
 
 ### Inline Declarations
 [DATA](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L438-L453)  
