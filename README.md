@@ -55,3 +55,5 @@
 ### Addition - ABAP Feature Matrix 
 [ABAP Feature Matrix](https://software-heroes.com/en/abap-feature-matrix)  
 This website shows you a list of avaliable/not available or deprecated ABAP Statements for the release and area you selected.
+
+[Overview and Usage of ABAP Feature Matrix ]([https://software-heroes.com/en/abap-feature-matrix](https://software-heroes.com/en/blog/abap-matirx-afm-alm-en))  
