@@ -45,12 +45,12 @@
 [Select with FIELDS](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L280-L284)  
 [Select with Subquery](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L286-L293)  
 [VALUE within INSERT](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L295-L306)  
-[Joins](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L308-L338)  
-[Union](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L340-L367)  
-[Aggregation Functions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L370-L380)  
-[Arithmetic Operations & div, division, ceil, floor, round](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L383-L397)  
-[String expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L400-L412)  
-[Case & Coalesce](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L415-L425)  
+[Joins](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L308-L342)  
+[Union](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L344-L371)  
+[Aggregation Functions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L374-L384)  
+[Arithmetic Operations & div, division, ceil, floor, round](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L387-L401)  
+[String expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L404-L416)  
+[Case & Coalesce](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L419-L429)  
 
 ### Addition - ABAP Feature Matrix 
 [ABAP Feature Matrix](https://software-heroes.com/en/abap-feature-matrix)  
