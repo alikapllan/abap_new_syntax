@@ -20,13 +20,13 @@ CLASS zcl_abap_new_syntax DEFINITION
     METHODS type_checking .                " IS INSTANCE OF, CASE TYPE OF
     METHODS conversions .                  " ALPHA Conversion, Date Format, Time Format, TIMESTAMP, Case of Text, Number Format
     METHODS enhanced_sql_syntax .          " SELECT with FIELD, SELECT with Subquery, VALUE within INSERT
-                                           " JOINS, UNION, Aggregation Functions, Arithmetic Operations, SQL String Expressions
-                                           " and CASE - COALESCE
+    " JOINS, UNION, Aggregation Functions, Arithmetic Operations, SQL String Expressions
+    " and CASE - COALESCE
 ENDCLASS.
 
 
 
-CLASS ZCL_ABAP_NEW_SYNTAX IMPLEMENTATION.
+CLASS zcl_abap_new_syntax IMPLEMENTATION.
 
 
   METHOD conditional_expressions.
@@ -308,32 +308,36 @@ CLASS ZCL_ABAP_NEW_SYNTAX IMPLEMENTATION.
     " JOINS
 
     " 1. INNER JOIN
-    SELECT po~purchdoc,
-           porg~plant,
-           po~netprice
+    SELECT
       FROM zahk_po_head_1 AS po
-             INNER JOIN
+             INNER JOIN " or JOIN
                zahk_porg_1 AS porg ON po~purch_org = porg~org
+      FIELDS po~purchdoc,
+             porg~plant,
+             po~netprice
       ORDER BY porg~plant
       INTO TABLE @DATA(lt_inner_join).
 
+
     " 2. LEFT OUTER JOIN
-    SELECT po~purchdoc,
-           porg~plant,
-           po~netprice
+    SELECT
       FROM zahk_po_head_1 AS po
              LEFT OUTER JOIN " or LEFT JOIN
                zahk_porg_1 AS porg ON po~purch_org = porg~org
+      FIELDS po~purchdoc,
+             porg~plant,
+             po~netprice
       ORDER BY porg~plant
       INTO TABLE @DATA(lt_left_join).
 
     " 3. RIGHT OUTER JOIN
-    SELECT po~purchdoc,
-           porg~plant,
-           po~netprice
+    SELECT
       FROM zahk_po_head_1 AS po
              RIGHT OUTER JOIN " or RIGHT JOIN
                zahk_porg_1 AS porg ON po~purch_org = porg~org
+      FIELDS po~purchdoc,
+             porg~plant,
+             po~netprice
       ORDER BY porg~plant
       INTO TABLE @DATA(lt_right_join).
 
