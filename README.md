@@ -60,7 +60,7 @@
 - Loop with Key
 - Filter and Lines
 - Reduce
-- Lines
+- For and Lines
    
 -> You can also [check their overall performance](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_demo_filtering.clas.abap#L45-L77) at runtime. To see the results, run this class in your ADT. Linked blogpost from SoftwareHeroes above also provides the result at the end of the blog.
 
