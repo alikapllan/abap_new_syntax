@@ -52,6 +52,18 @@
 [String expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L404-L416)  
 [Case & Coalesce](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L419-L429)  
 
+### All Data Filtering Variations 
+##### -> here shown code has been taken from [this nice blogpost](https://software-heroes.com/en/blog/abap-quick-performance-data-filtering) of [SoftwareHeroes](https://software-heroes.com/en/). 
+[All Data Filtering Variations](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_demo_filtering.clas.abap#L101-L133)
+- Loop into DATA
+- Loop ASSIGNING
+- Loop with Key
+- Filter and Lines
+- Reduce
+- Lines
+   
+-> You can also [check their overall performance](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_demo_filtering.clas.abap#L45-L77) at runtime. To see the results, run this class in your ADT. Linked blogpost from SoftwareHeroes above also provides the result at the end of the blog.
+
 ### Addition - ABAP Feature Matrix 
 [ABAP Feature Matrix](https://software-heroes.com/en/abap-feature-matrix)  
 This website shows you a list of avaliable/not available or deprecated ABAP Statements for the release and area you selected.
