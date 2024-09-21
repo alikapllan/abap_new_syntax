@@ -225,10 +225,10 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
 *   7.51: New Conversions
 
 *   ALPHA Conversion
-    DATA(lv_alpha_in)  = |{ lv_matnr_without_zero ALPHA = IN }|. " adds leading zeros
+    DATA(lv_alpha_in)  = |{ lv_matnr_without_zero ALPHA = IN }|. " adds leading zeros. You can also use it for every conversion which a standard FM does e.g. CONVERSION_EXIT_PARVW_INPUT
 *    out->write( lv_alpha_in ).
 
-    DATA(lv_alpha_out) = |{ lv_matnr_with_zero ALPHA = OUT }|.   " removes leading zeros
+    DATA(lv_alpha_out) = |{ lv_matnr_with_zero ALPHA = OUT }|.   " removes leading zeros. You can also use it for every conversion which a standard FM does
 *    out->write( lv_alpha_out ).
 
 
