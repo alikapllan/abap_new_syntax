@@ -1,9 +1,9 @@
 # ABAP New Syntax 7.4x 7.5x
 
 ### Inline Declarations
-[DATA](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L438-L453)  
-[Field-Symbol](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L457-L465)  
-[REFERENCE INTO DATA](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L467-L471)  
+[DATA](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L441-L458)  
+[Field-Symbol](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L461-L469)  
+[REFERENCE INTO DATA](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L471-L475)  
 
 ### Constructor Expressions
 [VALUE](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L65-L86)  
@@ -16,22 +16,22 @@
 [FILTER](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L183-L214)  
 
 ### Conditional Expressions (Part of Constructor Exp.)
-[SWITCH](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L40-L43)  
-[COND](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L49-L51)  
-[xsdbool(extra)](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L46)  
+[SWITCH](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L39-L43)  
+[COND](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L48-L51)  
+[xsdbool(extra)](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L45-L46)  
 
 ### Internal Table Expressions
-[iTab expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L479-L497)  
-[line_index](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L497)  
-[line_exists](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L494)  
+[iTab expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L481-L503)  
+[line_index](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L500-L501)  
+[line_exists](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L496-L498)  
 
 ### LOOP AT .. GROUP BY
-[LOOP AT .. GROUP BY](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L504-L534)
+[LOOP AT .. GROUP BY](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L506-L540)
 
 ### Advanced Type Checking 
-[IS INSTANCE OF](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L549-L552)  
-[CASE TYPE OF](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L554-L560)  
-[some utility class methods](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L562-L573)  
+[IS INSTANCE OF](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L553-L556)  
+[CASE TYPE OF](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L558-L564)  
+[some utility class methods](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L566-L577)  
 
 ### Conversions
 [Alpha Conversion](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L222-L232)  
