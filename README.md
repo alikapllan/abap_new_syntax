@@ -21,17 +21,17 @@
 [xsdbool(extra)](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L45-L46)  
 
 ### Internal Table Expressions
-[iTab expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L481-L503)  
-[line_index](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L500-L501)  
-[line_exists](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L496-L498)  
+[iTab expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L488-L510)  
+[line_index](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L507-L508)  
+[line_exists](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L503-L505)  
 
 ### LOOP AT .. GROUP BY
-[LOOP AT .. GROUP BY](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L506-L540)
+[LOOP AT .. GROUP BY](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L513-L547)
 
 ### Advanced Type Checking 
-[IS INSTANCE OF](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L553-L556)  
-[CASE TYPE OF](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L558-L564)  
-[some utility class methods](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L566-L577)  
+[IS INSTANCE OF](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L560-L563)  
+[CASE TYPE OF](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L565-L571)  
+[some utility class methods](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L573-L584)  
 
 ### Conversions
 [Alpha Conversion](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L222-L232)  
@@ -48,9 +48,10 @@
 [Joins](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L308-L342)  
 [Union](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L344-L371)  
 [Aggregation Functions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L374-L384)  
-[Arithmetic Operations & div, division, ceil, floor, round](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L387-L401)  
-[String expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L404-L416)  
-[Case & Coalesce](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L419-L429)  
+[CASTING in Aggregation Functions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L386-L392)  
+[Arithmetic Operations & div, division, ceil, floor, round](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L394-L408)  
+[String expressions](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L411-L423)  
+[Case & Coalesce](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L426-L436)  
 
 ### All Data Filtering Variations 
 ##### -> here shown code has been taken from [this nice blogpost](https://software-heroes.com/en/blog/abap-quick-performance-data-filtering) of [SoftwareHeroes](https://software-heroes.com/en/). 
