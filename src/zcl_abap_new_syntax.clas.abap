@@ -383,6 +383,13 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
       ORDER BY total_price
       INTO TABLE @DATA(lt_po_header_grouped).
 
+    " CASTING in Aggregation Functions
+    SELECT FROM zahk_demo_numc
+      FIELDS dummy_key,
+             SUM( CAST( numc_field_to_int AS INT4 ) ) AS numc_summed_in_int,
+             AVG( numc_field_to_int AS DEC( 8,1 ) )   AS numc_avr_in_dec
+      GROUP BY dummy_key
+      INTO TABLE @DATA(lt_cast_in_agg_functions).
 
     " Arithmetic Operations - div, division, floor, round
     SELECT FROM zahk_po_head_1
