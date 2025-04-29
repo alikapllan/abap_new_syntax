@@ -47,7 +47,7 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
 
       " COND to assign a description based on destinations
       DATA(lv_description_cur) = COND #( WHEN lv_is_currency_euro = abap_true THEN 'Euro currency '
-                                         WHEN ls_scarr-currcode   = 'USD'     THEN 'Dolar currency'
+                                         WHEN ls_scarr-currcode = 'USD'       THEN 'Dolar currency'
                                          ELSE                                      'Other currency' ).
 
       CONCATENATE ls_scarr-carrname lv_status 'uses' lv_description_cur
@@ -291,6 +291,22 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
             FIELDS *
             WHERE org = po_header~purch_org )
       INTO TABLE @DATA(lt_po_head_subquery).
+
+    " INSERT CORRESPONDING
+    DATA lt_po_head_subquery_v2 LIKE lt_po_head_subquery.
+
+    LOOP AT lt_po_head_subquery INTO DATA(ls_po_head_subquery).
+      INSERT CORRESPONDING #( ls_po_head_subquery ) INTO TABLE lt_po_head_subquery_v2 REFERENCE INTO DATA(lr_po_head_subquery_v2).
+
+      SELECT SINGLE FROM zahk_po_head_1
+        FIELDS currency
+        WHERE currency   = 'EUR'
+          AND created_by = 'ALEX'
+        INTO CORRESPONDING FIELDS OF @lr_po_head_subquery_v2->*.
+
+      lr_po_head_subquery_v2->currency   = 'USD'.
+      lr_po_head_subquery_v2->created_by = cl_abap_context_info=>get_user_technical_name( ).
+    ENDLOOP.
 
     " VALUE within INSERT
     GET TIME STAMP FIELD DATA(lv_timestamp).
