@@ -42,6 +42,7 @@
 [Number Format](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L269-L273)  
 
 ### Enhanced OpenSQL
+[ABAP SQL Host Expressions](https://www.cadaxo.com/nicht-kategorisiert/abap-sql-host-expressions/) a nice worth to read Blogpost but is in German :P    
 [Select with FIELDS](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L280-L284)  
 [Select with Subquery](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L286-L293)  
 [INSERT CORRESPONDING](https://github.com/alikapllan/abap_new_syntax/blob/master/src/zcl_abap_new_syntax.clas.abap#L295-L309)  
