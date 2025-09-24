@@ -321,6 +321,14 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
                                      ( org = 'ORG8' plant = 'Plant6' )
                                      ( org = 'ORG9' plant = 'Plant7' ) ) ).
 
+    " INSERT CONV -> explicit data type conversion -> e.g. numc to char or vice versa
+    " here e.g. DRAD is used to READ documents related to material in SAP which then can be read via BAPI_OBJCL_GETDETAIL or CLAF_CLASSIFICATION_OF_OBJECTS
+    DATA lt_matnr_objky_drad TYPE SORTED TABLE OF drad-objky WITH UNIQUE KEY table_line.
+    DATA(lv_matnr) = '000000000000001234'.
+
+    INSERT CONV #( lv_matnr ) INTO TABLE lt_matnr_objky_drad.
+    INSERT CONV drad-objky( lv_matnr ) INTO TABLE lt_matnr_objky_drad.
+
     " JOINS
 
     " 1. INNER JOIN
