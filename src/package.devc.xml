@@ -4,6 +4,8 @@
   <asx:values>
    <DEVC>
     <CTEXT>ABAP New Syntax</CTEXT>
+    <LANGUAGE>E</LANGUAGE>
+    <MASTERLANG>D</MASTERLANG>
    </DEVC>
   </asx:values>
  </asx:abap>

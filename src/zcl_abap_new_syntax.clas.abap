@@ -1,34 +1,28 @@
 CLASS zcl_abap_new_syntax DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+  PUBLIC FINAL
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
+    INTERFACES zif_test_type_checking.
+    INTERFACES if_oo_adt_classrun.
 
-    INTERFACES zif_test_type_checking .
-    INTERFACES if_oo_adt_classrun .
-  PROTECTED SECTION.
   PRIVATE SECTION.
+    DATA number TYPE int2.
 
-    DATA number TYPE int2 .
-
-    METHODS inline_declarations .           " DATA, Field-Symbols, LOOP REFERENCE INTO DATA
-    METHODS constructor_expressions .      " VALUE, CORRESPONDING, BASE, NEW, REF, FOR, REDUCE, FILTER
-    METHODS conditional_expressions .      " SWITCH, xsdbool, COND
-    METHODS internal_table_expressions .
-    METHODS loop_at_group_by .
-    METHODS type_checking .                " IS INSTANCE OF, CASE TYPE OF
-    METHODS conversions .                  " ALPHA Conversion, Date Format, Time Format, TIMESTAMP, Case of Text, Number Format
-    METHODS enhanced_sql_syntax .          " SELECT with FIELD, SELECT with Subquery, VALUE within INSERT
+    METHODS inline_declarations.           " DATA, Field-Symbols, LOOP REFERENCE INTO DATA
+    METHODS constructor_expressions.      " VALUE, CORRESPONDING, BASE, NEW, REF, FOR, REDUCE, FILTER
+    METHODS conditional_expressions.      " SWITCH, xsdbool, COND
+    METHODS internal_table_expressions.
+    METHODS loop_at_group_by.
+    METHODS type_checking.                " IS INSTANCE OF, CASE TYPE OF
+    METHODS conversions.                  " ALPHA Conversion, Date Format, Time Format, TIMESTAMP, Case of Text, Number Format
+    METHODS enhanced_sql_syntax.          " SELECT with FIELD, SELECT with Subquery, VALUE within INSERT
     " JOINS, UNION, Aggregation Functions, Arithmetic Operations, SQL String Expressions
     " and CASE - COALESCE
 ENDCLASS.
 
 
-
 CLASS zcl_abap_new_syntax IMPLEMENTATION.
-
-
   METHOD conditional_expressions.
     SELECT FROM scarr
       FIELDS *
@@ -57,9 +51,7 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
-
   METHOD constructor_expressions.
-
 * VALUE, CORRESPONDING, BASE, NEW, REF, FOR, REDUCE, FILTER
 *--------------------------------------------------------------------*
 *& VALUE
@@ -67,24 +59,24 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
              id   TYPE int2,
              name TYPE char40,
            END OF lty_student,
-           ltt_student TYPE STANDARD TABLE OF lty_student
-                                          WITH EMPTY KEY.
+           ltt_student TYPE STANDARD TABLE OF lty_student WITH EMPTY KEY.
 
     " VALUE with structure
-    DATA(ls_student) = VALUE lty_student( id = 1 name = 'Jack' ).
-
+    DATA(ls_student) = VALUE lty_student( id   = 1
+                                          name = 'Jack' ).
 
     " VALUE with iTab - 1
     DATA(lt_student) = VALUE ltt_student( ( id = 2 name = 'Ashley' ) ).
 
     " VALUE with iTab - 2
-    DATA: lt_student2 TYPE ltt_student.
+    DATA lt_student2 TYPE ltt_student.
     lt_student2 = VALUE #( ( id = 3 name = 'Richard' )
                            ( id = 4 name = 'Anna'    ) ).
 
     " INSERT VALUE - no extra data definition needed
-    INSERT VALUE #( id = 5 name = 'Ben' ) INTO TABLE lt_student2.
-*--------------------------------------------------------------------*
+    INSERT VALUE #( id   = 5
+                    name = 'Ben' ) INTO TABLE lt_student2.
+    " ---------------------------------------------------------------------
 
 *--------------------------------------------------------------------*
 *& CORRESPONDING & BASE
@@ -96,38 +88,39 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
            END OF lty_scarr,
            ltt_scarr TYPE STANDARD TABLE OF lty_scarr WITH EMPTY KEY.
 
-    DATA: lt_scarr_no_url TYPE ltt_scarr.
+    DATA lt_scarr_no_url TYPE ltt_scarr.
 
     SELECT FROM scarr
-        FIELDS *
-        INTO CORRESPONDING FIELDS OF TABLE @lt_scarr_no_url
-        UP TO 5 ROWS.
+      FIELDS *
+      INTO CORRESPONDING FIELDS OF TABLE @lt_scarr_no_url
+      UP TO 5 ROWS.
 
     " CORRESPONDING -> Field names and its types should be identical
     DATA(lt_scarr_no_url2) = CORRESPONDING ltt_scarr( lt_scarr_no_url ).
 
     SELECT FROM scarr
-        FIELDS *
-        WHERE carrid = 'UA'
-        INTO TABLE @DATA(lt_scarr) UP TO 1 ROWS.
+      FIELDS *
+      WHERE carrid = 'UA'
+      INTO TABLE @DATA(lt_scarr)
+      UP TO 1 ROWS.
 
     " BASE keeps the former values inside
     lt_scarr_no_url2 = CORRESPONDING #( BASE ( lt_scarr_no_url2 ) lt_scarr ).
-*--------------------------------------------------------------------*
+    " ---------------------------------------------------------------------
 
 *--------------------------------------------------------------------*
 *& NEW & REF
-    DATA: oref  TYPE REF TO zcl_abap_new_syntax,
-          dref1 LIKE REF TO oref,
-          dref2 TYPE REF TO int2.
+    DATA oref  TYPE REF TO zcl_abap_new_syntax.
+    DATA dref1 LIKE REF TO oref.
+    DATA dref2 TYPE REF TO int2.
 
-    oref  = NEW #(  ).     " creates object from class
+    oref  = NEW #( ).     " creates object from class
     " DATA(oref) = NEW zcl_test_02_constructor_expr(  ). " with inline dec.
 
     dref1 = REF #( oref ). " holds object reference
-    dref2 = NEW #(  ).     " holds data reference
+    dref2 = NEW #( ).     " holds data reference
     dref2->* = dref1->*->number.
-*--------------------------------------------------------------------*
+    " ---------------------------------------------------------------------
 
 *--------------------------------------------------------------------*
 *& FOR
@@ -153,11 +146,11 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
 
     " FOR with WHERE & CORRESPONDING
     DATA(lt_carriers_with_eur_jpy) = VALUE ltt_carrier( FOR <carr> IN lt_scarr
-                                                        WHERE ( currcode = 'EUR' AND
-                                                                currcode = 'JPY' )
+                                                        WHERE (     currcode = 'EUR'
+                                                                AND currcode = 'JPY' )
                                                         " also filling carrid & carrname
                                                         ( CORRESPONDING #( <carr> ) )  ).
-*--------------------------------------------------------------------*
+    " ---------------------------------------------------------------------
 
 *--------------------------------------------------------------------*
 *& REDUCE
@@ -200,7 +193,6 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
 *    DATA(lt_scarr_ab_lh) = FILTER #( lt_scarr_all USING KEY carrid WHERE carrid = CONV #( 'AB' ) OR
 *                                                                         carrid = CONV #( 'LH' ) ).
 
-
     " -> AND is only allowed on the condition not using same key.
 *    DATA(lt_scarr_ab_lh) = FILTER #( lt_scarr_all USING KEY carrid WHERE carrid = CONV #( 'AB' ) AND
 *                                                                         carrid = CONV #( 'LH' ) ).
@@ -212,34 +204,29 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
     " FILTER in TABLE Condition - again all entries without Air Berlin
     DATA(lt_scarr_excl_ab2) = FILTER #( lt_scarr_all IN lt_scarr_ab USING KEY carrid
                                                                     WHERE carrid <> carrid ).
-*--------------------------------------------------------------------*
-
+    " ---------------------------------------------------------------------
   ENDMETHOD.
 
-
   METHOD conversions.
+    DATA lv_matnr_without_zero TYPE char15 VALUE '123456789'.
+    DATA lv_matnr_with_zero    TYPE char15 VALUE '000000123456789'.
 
-    DATA: lv_matnr_without_zero TYPE char15 VALUE '123456789',
-          lv_matnr_with_zero    TYPE char15 VALUE '000000123456789'.
+    " 7.51: New Conversions
 
-*   7.51: New Conversions
-
-*   ALPHA Conversion
+    " ALPHA Conversion
     DATA(lv_alpha_in)  = |{ lv_matnr_without_zero ALPHA = IN }|. " adds leading zeros. You can also use it for every conversion which a standard FM does e.g. CONVERSION_EXIT_PARVW_INPUT
 *    out->write( lv_alpha_in ).
 
     DATA(lv_alpha_out) = |{ lv_matnr_with_zero ALPHA = OUT }|.   " removes leading zeros. You can also use it for every conversion which a standard FM does
 *    out->write( lv_alpha_out ).
 
-
-*   Date Format
+    " Date Format
     " YYYY-MM-DD
 *    out->write( |ISO Format : { sy-datum DATE = ISO }| ).
     " as per user setting
 *    out->write( |User Format : { sy-datum DATE = USER }| ).
     " Formatting setting of language environment
 *    out->write( |Environment Format : { sy-datum DATE = ENVIRONMENT }| ).
-
 
 *   Time Format
 *    out->write( 'Time' ).
@@ -248,8 +235,7 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
 *    out->write( |User Format: { sy-uzeit TIME = USER }| ).
 *    out->write( |Environment Format: { sy-uzeit TIME = USER }| ).
 
-
-*   TIMESTAMP
+    " TIMESTAMP
     SELECT SINGLE tzonesys FROM ttzcu INTO @DATA(lv_timezone).
     GET TIME STAMP FIELD DATA(lv_timestamp).
 *    out->write( 'TIMESTAMP' ).
@@ -258,24 +244,46 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
 *    out->write( |'ISO Format:'           { lv_timestamp TIMEZONE = lv_timezone TIMESTAMP = ISO }| ).
 *    out->write( |'Environment Format:'   { lv_timestamp TIMEZONE = lv_timezone TIMESTAMP = ENVIRONMENT }| ).
 
-
 *   Case of Text
 *    out->write( 'Case of Text' ).
 *    out->write( |RAW Format:    { 'Data' CASE = (cl_abap_format=>c_raw) }| ).
 *    out->write( |Upper Format:  { 'Data' CASE = (cl_abap_format=>c_upper) }| ).
 *    out->write( |Lower Format:  { 'Data' CASE = (cl_abap_format=>c_lower) }| ).
 
-
-*   Number Format
+    " Number Format
     DATA(lv_number) = 1234567890.
 *    out->write( |Raw Format:         { lv_number NUMBER = (cl_abap_format=>n_raw) }| ).
 *    out->write( |User Format:        { lv_number NUMBER = (cl_abap_format=>n_user) }| ).
 *    out->write( |Environment Format: { lv_number NUMBER = (cl_abap_format=>n_environment) }| ).
-
   ENDMETHOD.
 
-
   METHOD enhanced_sql_syntax.
+    " LINES OF within VALUE
+    TYPES tt_str TYPE STANDARD TABLE OF char40 WITH EMPTY KEY.
+
+    DATA(s_matnr) = VALUE tt_str( ( 'MAT0001' ) ( 'MAT0002' ) ).
+    DATA(s_prod)  = VALUE tt_str( ( 'PROD_A' ) ( 'TEMP_X' ) ( 'PROD_B' ) ).
+    " LINES OF: copy all rows (requires compatible row type)
+    DATA(it_matnr) = VALUE tt_str( ( LINES OF s_matnr )  ).
+    " FOR IN: filter/transform rows (keeps only products matching pattern)
+    " difference to FOR IN
+    " - conditions can be applied
+    " - mapping can be done etc.
+    DATA(it_prod)  = VALUE tt_str( FOR table_line IN s_prod WHERE ( table_line CP 'PROD_*' )
+                                   ( table_line ) ).
+
+    " APPENDING TABLE
+*    DATA lr_docid TYPE RANGE OF /scwm/de_docid.
+*
+*    SELECT FROM /scdl/db_proch_o " outbound deliveries
+*      FIELDS docid, docnO
+*      WHERE docid IN @lr_docid
+*      INTO TABLE @DATA(lt_map).
+    " -> if we want to append the result to an already existing internal table, we can use APPENDING TABLE
+*    SELECT FROM /scdl/db_proch_i " inbound deliveries
+*      FIELDS docid, docnO
+*      WHERE docid IN @lr_docid
+*      APPENDING TABLE @lt_map.
 
     " SELECT with FIELD
     SELECT FROM zahk_po_head_1
@@ -311,8 +319,8 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
     " VALUE within INSERT
     GET TIME STAMP FIELD DATA(lv_timestamp).
 
-    INSERT zahk_porg_1 FROM @( VALUE #( org = 'ORG6'
-                                        plant = 'Plant6'
+    INSERT zahk_porg_1 FROM @( VALUE #( org                    = 'ORG6'
+                                        plant                  = 'Plant6'
                                         last_changed_timestamp = lv_timestamp ) ).
 
     INSERT zahk_porg_1 FROM TABLE @(
@@ -342,7 +350,6 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
       ORDER BY porg~plant
       INTO TABLE @DATA(lt_inner_join).
 
-
     " 2. LEFT OUTER JOIN
     SELECT
       FROM zahk_po_head_1 AS po
@@ -369,31 +376,38 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
     " -> it joins the output tables of two or more queries in SQL with each other
 
     " 1. UNION
-    SELECT FROM zahk_po_head_1 FIELDS purch_org AS org
-     UNION
-    SELECT FROM zahk_porg_1    FIELDS org
-        INTO TABLE @DATA(lt_union). " with @data -> selected field names must be same(also types)
+    SELECT FROM zahk_po_head_1
+      FIELDS purch_org AS org
+    UNION
+    SELECT FROM zahk_porg_1
+      FIELDS org
+    INTO TABLE @DATA(lt_union). " with @data -> selected field names must be same(also types)
 
     " other variant - if some columns not present in second table
-    SELECT FROM zahk_po_head_1 FIELDS purch_org AS org,
-                                      purchdoc
-     UNION
-    SELECT FROM zahk_porg_1    FIELDS org,
-                                      '-' AS purchdoc " purchdoc doesn't exist in porg_1 table
-        INTO TABLE @DATA(lt_union_for_missed_column).
+    SELECT FROM zahk_po_head_1
+      FIELDS purch_org AS org,
+             purchdoc
+    UNION
+    SELECT FROM zahk_porg_1
+      FIELDS org,
+             '-' AS purchdoc " purchdoc doesn't exist in porg_1 table
+    INTO TABLE @DATA(lt_union_for_missed_column).
 
     " 2. UNION ALL
-    SELECT FROM zahk_po_head_1 FIELDS purch_org AS org
-     UNION ALL " joins every occurring data from selected columns together
-    SELECT FROM zahk_porg_1    FIELDS org
-        INTO TABLE @DATA(lt_union_all).
+    SELECT FROM zahk_po_head_1
+      FIELDS purch_org AS org
+    UNION ALL " joins every occurring data from selected columns together
+    SELECT FROM zahk_porg_1
+      FIELDS org
+    INTO TABLE @DATA(lt_union_all).
 
     " 3. UNION DISTINCT
-    SELECT FROM zahk_po_head_1 FIELDS purch_org AS org
-     UNION DISTINCT " joins every unique data from selected columns together
-    SELECT FROM zahk_porg_1    FIELDS org
-        INTO TABLE @DATA(lt_union_distinct).
-
+    SELECT FROM zahk_po_head_1
+      FIELDS purch_org AS org
+    UNION DISTINCT " joins every unique data from selected columns together
+    SELECT FROM zahk_porg_1
+      FIELDS org
+    INTO TABLE @DATA(lt_union_distinct).
 
     " Aggregation Functions
     SELECT FROM zahk_po_head_1
@@ -431,7 +445,6 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
              round( division( ( netprice + 10 ) * 20, 33, 2 ), 1 ) AS round  " round decimal UP & DOWN
       INTO TABLE @DATA(lt_po_arithmetic).
 
-
     " SQL String Expressions - DDIC based Tables & CDS Views only
     SELECT FROM zahk_po_head_1
       FIELDS purchdoc,
@@ -446,29 +459,24 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
              rpad( purch_org, 8, '*' )                      AS dec_8_r  " adds * to the right
       INTO TABLE @DATA(lt_po_string_exp).
 
-
     " CASE - COALESCE
     SELECT FROM zahk_po_head_1
       FIELDS purchdoc,
              description,
-             coalesce( netprice, 0 ) AS netprice, " print 0, if netprice value is NULL
-*            coalesce( netprice, netprice1, 0 )   " checks netprice1 if netprice is NULL. Otherwise print 0
+             coalesce( netprice, 0 )                  AS netprice, " print 0, if netprice value is NULL
+*             coalesce( netprice, netprice1, 0 )   " checks netprice1 if netprice is NULL. Otherwise print 0
              CASE WHEN netprice < 15 THEN 'cheap'
                   WHEN netprice > 15 THEN 'expensive'
                   ELSE 'no price'
-             END AS price_comment
+             END                                      AS price_comment
       INTO TABLE @DATA(lt_po_case_coalesce).
-
   ENDMETHOD.
-
 
   METHOD if_oo_adt_classrun~main.
     " paste here the code you would like to try and run
   ENDMETHOD.
 
-
   METHOD inline_declarations.
-
 *--------------------------------------------------------------------*
 *& - DATA
     DATA(lv_number) = 5.          " variable
@@ -486,7 +494,7 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
       INTO TABLE @DATA(lt_scarr). " table
 
     DATA(lt_scarr_copy) = lt_scarr.
-*--------------------------------------------------------------------*
+    " ---------------------------------------------------------------------
 
 *--------------------------------------------------------------------*
 *& Field Symbols
@@ -504,16 +512,13 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
       lr_scarr->currcode = 'EUR'. " - works same as field symbols
     ENDLOOP.                      " - FS offers more performance in tables
     " with more entries
-*--------------------------------------------------------------------*
-
+    " ---------------------------------------------------------------------
   ENDMETHOD.
 
-
   METHOD internal_table_expressions.
-
     SELECT FROM scarr
-        FIELDS *
-        INTO TABLE @DATA(lt_scarr).
+      FIELDS *
+      INTO TABLE @DATA(lt_scarr).
 
     " fetching whole data line(structure) of Lufthansa
     " -> if no record is found, throws exception -> cx_sy_itab_line_not_found
@@ -530,12 +535,9 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
 
     " index of Lufthansa (returns 0 in case of no record found)
     DATA(lv_lv_lufthansa_index) = line_index( lt_scarr[ carrid = 'LH' ] ).
-
   ENDMETHOD.
 
-
   METHOD loop_at_group_by.
-
     SELECT FROM scarr
       FIELDS *
       INTO TABLE @DATA(lt_scarr).
@@ -554,7 +556,7 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
     " Group by currency EUR or USD
     LOOP AT lt_scarr INTO ls_scarr WHERE    currcode = 'EUR'
                                          OR currcode = 'USD'
-                                   GROUP BY ls_scarr-currcode.
+         GROUP BY ls_scarr-currcode.
 
     ENDLOOP.
 
@@ -567,19 +569,16 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
     LOOP AT lt_scarr REFERENCE INTO DATA(lr_scarr) GROUP BY lr_scarr->*-carrid.
       " or GROUP BY lr_scarr->carrid
     ENDLOOP.
-
   ENDMETHOD.
 
-
   METHOD type_checking.
+    DATA lo_if_type_check TYPE REF TO zif_test_type_checking.
 
-    DATA: lo_if_type_check TYPE REF TO zif_test_type_checking.
+    lo_if_type_check = CAST #( NEW zcl_abap_new_syntax( ) ).
 
-    lo_if_type_check = CAST #( NEW zcl_abap_new_syntax(  ) ).
-
-*    -> to confirm the object's specific class type / instance type
-*    -> or when dealing with inheritance hierarchies
-*       where multiple classes implement the same interface
+    " -> to confirm the object's specific class type / instance type
+    " -> or when dealing with inheritance hierarchies
+    "    where multiple classes implement the same interface
 
     " IS INSTANCE OF
     IF lo_if_type_check IS INSTANCE OF zcl_abap_new_syntax.
@@ -598,7 +597,7 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
     " -> Utility Classes might be beneficial in more dynamic scenarios
     " (e.g. determining class from a configuration at runtime)
     IF abap_true = cl_lcr_util=>instanceof( object = lo_if_type_check
-                                            class = 'zcl_abap_new_syntax' ).
+                                            class  = 'zcl_abap_new_syntax' ).
 *      out->write( 'variant 3 -> zcl_abap_new_syntax' ).
     ENDIF.
 
@@ -606,6 +605,5 @@ CLASS zcl_abap_new_syntax IMPLEMENTATION.
                                                                 type_name = 'zcl_abap_new_syntax' ).
 *      out->write( 'variant 4 -> zcl_abap_new_syntax' ).
     ENDIF.
-
   ENDMETHOD.
 ENDCLASS.
